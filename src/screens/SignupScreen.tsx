@@ -7,29 +7,20 @@ import {
     View
 } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-type LoginScreenProps = {
-    navigation: NativeStackNavigationProp<any>;
-};
-
-export default function LoginScreen({navigation}: LoginScreenProps) {
+export default function SignupScreen() {
     const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
     const [password, setPassword] = useState('')
-
-    const onLoginPress = () => {
-        console.log('Login button pressed')
-    }
 
     const onSignupPress = () => {
         console.log('Signup button pressed')
-        navigation.navigate('Signup')
-    }
 
+    }
     return (
         <SafeAreaProvider>
             <View style={style.container}>
-                <Text style={{ marginBottom: 20 }}>Login Screen</Text>
+                <Text style={{ marginBottom: 50 }}>Signup Screen</Text>
                 <TextInput
                     style={style.textField}
                     placeholder="Email"
@@ -38,21 +29,18 @@ export default function LoginScreen({navigation}: LoginScreenProps) {
                 />
                 <TextInput
                     style={style.textField}
+                    placeholder="Name"
+                    onChangeText={setName}
+                    value={name}
+                />
+                <TextInput
+                    style={style.textField}
                     secureTextEntry
                     placeholder="Password"
                     onChangeText={setPassword}
                     value={password}
                 />
-                <Button title="Login" onPress={onLoginPress} />
-                <View style={style.row}>
-                    <Text>Don't have an account?</Text>
-                    <Text
-                        style={style.link}
-                        onPress={onSignupPress}>
-                        Signup
-                    </Text>
-                    <Text> Now </Text>
-                </View>
+                <Button title="Signup" onPress={onSignupPress} />
             </View>
         </SafeAreaProvider>
 
@@ -65,10 +53,6 @@ const style = StyleSheet.create({
         justifyContent: 'center', //horizontal
         alignItems: 'center', //vertical
     },
-    row: {
-        flexDirection: 'row',
-        marginTop: 20,
-    },
     textField: {
         height: 40,
         width: '80%',
@@ -76,9 +60,6 @@ const style = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 10,
-    },
-    link: {
-        color: 'blue',
-        fontWeight: 'bold',
     }
+
 })

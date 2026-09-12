@@ -5,48 +5,22 @@
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { StyleSheet } from 'react-native';
 import LoginScreen from './src/screens/LoginScreen';
 
-// function App() {
-//   const isDarkMode = useColorScheme() === 'dark';
+import SignupScreen from './src/screens/SignupScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-//   return (
-//     <SafeAreaProvider>
-//       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-//       <AppContent />
-//     </SafeAreaProvider>
-//   );
-// }
-
-// function AppContent() {
-//   const safeAreaInsets = useSafeAreaInsets();
-
-//   return (
-//     <View style={styles.container}>
-//       <NewAppScreen
-//         templateFileName="App.tsx"
-//         safeAreaInsets={safeAreaInsets}
-//       />
-//     </View>
-//   );
-// }
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <LoginScreen />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Signup" component={SignupScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
