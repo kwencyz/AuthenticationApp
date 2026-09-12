@@ -11,29 +11,38 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import LoginScreen from './src/screens/LoginScreen';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+// function App() {
+//   const isDarkMode = useColorScheme() === 'dark';
 
-  return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
+//   return (
+//     <SafeAreaProvider>
+//       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+//       <AppContent />
+//     </SafeAreaProvider>
+//   );
+// }
 
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
+// function AppContent() {
+//   const safeAreaInsets = useSafeAreaInsets();
 
+//   return (
+//     <View style={styles.container}>
+//       <NewAppScreen
+//         templateFileName="App.tsx"
+//         safeAreaInsets={safeAreaInsets}
+//       />
+//     </View>
+//   );
+// }
+
+export default function App() {
   return (
     <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
+      <LoginScreen />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -41,5 +50,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-export default App;
