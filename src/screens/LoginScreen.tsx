@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAuth } from '../auth/AuthContext';
 import { USER_NOT_FOUND_MESSAGE } from '../auth/AuthService';
@@ -62,36 +62,48 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 
     return (
         <SafeAreaProvider>
-            <View style={style.container}>
-                <Text style={style.title}>Login</Text>
-                <TextInput
-                    style={style.textField}
-                    placeholder="Email"
-                    autoCapitalize="none"
-                    keyboardType="email-address"
-                    onChangeText={setEmail}
-                    value={email}
-                />
-                <PasswordInput
-                    placeholder="Password"
-                    onChangeText={setPassword}
-                    value={password}
-                />
-                {error && <Text style={style.error}>{error}</Text>}
-                <TouchableOpacity
-                    style={style.button}
-                    onPress={onLoginPress}
-                    disabled={isSubmitting}>
-                    {isSubmitting ? (
-                        <ActivityIndicator color="#fff" />
-                    ) : (
-                        <Text style={style.buttonText}>Login</Text>
-                    )}
-                </TouchableOpacity>
-                <View style={style.row}>
-                    <Text>Don't have an account? </Text>
-                    <Text style={style.link} onPress={onSignupPress}>
-                        Signup
+            <View style={style.screen}>
+                <SafeAreaView edges={['top']} style={style.header}>
+                    <Text style={style.headerLine}>Hello!</Text>
+                    <Text style={style.headerLine}>Login Now</Text>
+                </SafeAreaView>
+                <View style={style.content}>
+                    <View>
+                        <TextInput
+                            style={style.textField}
+                            placeholder="Email"
+                            autoCapitalize="none"
+                            keyboardType="email-address"
+                            onChangeText={setEmail}
+                            value={email}
+                        />
+                        <PasswordInput
+                            placeholder="Password"
+                            onChangeText={setPassword}
+                            value={password}
+                        />
+                        {error && <Text style={style.error}>{error}</Text>}
+                        <TouchableOpacity
+                            style={style.button}
+                            onPress={onLoginPress}
+                            disabled={isSubmitting}>
+                            {isSubmitting ? (
+                                <ActivityIndicator color={BLACK} />
+                            ) : (
+                                <Text style={style.buttonText}>Login</Text>
+                            )}
+                        </TouchableOpacity>
+                    </View>
+                    <Text style={style.row}>
+                        <Text style={style.rowText}>Don't have an account?</Text>
+                        {'\n'}
+                        <Text style={style.link} onPress={onSignupPress}>
+                            Sign Up
+                        </Text>
+                        <Text style={style.rowText} onPress={onSignupPress}>
+                            {' '}
+                            Now!
+                        </Text>
                     </Text>
                 </View>
             </View>
@@ -99,49 +111,77 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
     );
 }
 
+const YELLOW = '#F6D34E';
+const BLACK = '#111111';
+const GRAY_LINE = '#9CA3AF';
+const GRAY_TEXT = '#6B7280';
+
 const style = StyleSheet.create({
-    container: {
+    screen: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
+        backgroundColor: '#fff',
     },
-    title: {
-        fontSize: 28,
-        fontWeight: 'bold',
-        marginBottom: 30,
+    header: {
+        backgroundColor: YELLOW,
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        paddingHorizontal: 24,
+        paddingTop: 16,
+        paddingBottom: 80,
+    },
+    headerLine: {
+        fontSize: 32,
+        fontWeight: '800',
+        color: BLACK,
+    },
+    content: {
+        flex: 1,
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 32,
+        borderTopRightRadius: 32,
+        marginTop: -40,
+        paddingHorizontal: 24,
+        paddingTop: 50,
+        paddingBottom: 24,
+        justifyContent: 'space-between',
     },
     row: {
-        flexDirection: 'row',
-        marginTop: 20,
+        textAlign: 'right',
+    },
+    rowText: {
+        color: GRAY_TEXT,
     },
     textField: {
-        height: 40,
-        width: '80%',
-        paddingHorizontal: 10,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10,
+        height: 44,
+        width: '100%',
+        paddingHorizontal: 4,
+        paddingVertical: 8,
+        borderBottomColor: GRAY_LINE,
+        borderBottomWidth: 1,
+        marginBottom: 24,
+        fontSize: 16,
     },
     button: {
-        backgroundColor: '#2563eb',
-        paddingVertical: 12,
-        paddingHorizontal: 24,
-        borderRadius: 6,
-        width: '80%',
+        backgroundColor: YELLOW,
+        borderWidth: 2,
+        borderColor: BLACK,
+        paddingVertical: 14,
+        borderRadius: 28,
+        width: '100%',
         alignItems: 'center',
-        marginTop: 10,
+        marginTop: 16,
     },
     buttonText: {
-        color: '#fff',
-        fontWeight: 'bold',
+        color: BLACK,
+        fontWeight: '700',
+        fontSize: 16,
     },
     error: {
         color: 'red',
         marginBottom: 10,
     },
     link: {
-        color: 'blue',
-        fontWeight: 'bold',
+        color: BLACK,
+        fontWeight: '700',
     },
 });
