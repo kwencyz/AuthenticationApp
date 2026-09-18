@@ -13,6 +13,16 @@ A React Native authentication app with Login, Signup, and Home screens, built wi
 - **Password visibility toggle** (`src/components/PasswordInput.tsx`) — Show/Hide button on password fields (bonus task).
 - **Navigation** (`src/navigation/AppNavigator.tsx`) — switches between the auth stack (Login/Signup) and Home automatically based on whether `user` is set.
 
+## Screenshots
+
+| Login | Signup | Home |
+|---|---|---|
+| ![Login screen](screenshots/login.png) | ![Signup screen](screenshots/signup.png) | ![Home screen](screenshots/home.png) |
+
+| Login — no account found | Signup — account already exists |
+|---|---|
+| ![Login no account found alert](screenshots/login-no-account-found.png) | ![Signup account already exists alert](screenshots/signup-account-exists.png) |
+
 ## Known limitation
 
 There's no real backend — `AuthService.ts` keeps registered users in memory, so **signed-up accounts are lost on a full app reload** (Metro fast refresh preserves them; a cold restart does not). The *logged-in session* itself does persist across restarts via AsyncStorage, but re-registering after a cold restart is expected.
