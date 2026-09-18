@@ -1,4 +1,21 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+A React Native authentication app with Login, Signup, and Home screens, built with React Context API for state management and React Navigation for screen flow.
+
+## Features
+
+- **AuthContext** (`src/auth/AuthContext.tsx`) — global auth state with `user`, `login`, `signup`, and `logout`.
+- **AuthService** (`src/auth/AuthService.ts`) — mock backend simulating async network calls (`Promise` + `setTimeout`) against an in-memory user store. Swap this file for real HTTP calls later without touching `AuthContext` or the screens.
+- **Validation** (`src/validation/authValidation.ts`) — email format, required fields, and minimum password length (6 chars), checked before hitting `AuthService`.
+- **Persistence** (`src/storage/authStorage.ts`) — the logged-in user is saved to `AsyncStorage` so the session survives an app restart.
+- **Screens**:
+  - `LoginScreen` — email/password, shows format errors and incorrect-credential errors.
+  - `SignupScreen` — name/email/password, shows missing-field, invalid-email, and short-password errors.
+  - `HomeScreen` — shows the logged-in user's name and email, with a Logout button.
+- **Password visibility toggle** (`src/components/PasswordInput.tsx`) — Show/Hide button on password fields (bonus task).
+- **Navigation** (`src/navigation/AppNavigator.tsx`) — switches between the auth stack (Login/Signup) and Home automatically based on whether `user` is set.
+
+## Known limitation
+
+There's no real backend — `AuthService.ts` keeps registered users in memory, so **signed-up accounts are lost on a full app reload** (Metro fast refresh preserves them; a cold restart does not). The *logged-in session* itself does persist across restarts via AsyncStorage, but re-registering after a cold restart is expected.
 
 # Getting Started
 
